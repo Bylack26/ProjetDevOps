@@ -7,10 +7,10 @@ import java.util.List;
 
 public class DataFrame {
     private List<String> columns;
-    private List<List<Object>> data;
+    private ArrayList<ArrayList<Object>> data;
 
     // Constructeur prenant une liste de colonnes en paramètre
-    public DataFrame(List<String> columns, List<List<Object>> data) {
+    public DataFrame(List<String> columns, ArrayList<ArrayList<Object>> data) {
         this.columns = columns;
         this.data = data;
     }
@@ -20,22 +20,23 @@ public class DataFrame {
         BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
         String line;
         columns = new ArrayList<>();
-        data = new ArrayList<>();
+        data = new ArrayList<ArrayList<Object>>();
 
         // Lecture de la première ligne pour récupérer les noms de colonnes
         if ((line = reader.readLine()) != null) {
             columns = Arrays.asList(line.split(","));
         }
-
+        for(int i = 0; i< columns.size();i++){
+            ArrayList<Object> row = new ArrayList<>();
+            data.add(row);
+        }
         // Lecture des lignes suivantes pour récupérer les données
         while ((line = reader.readLine()) != null) {
-            List<Object> row = new ArrayList<>();
             String[] values = line.split(",");
-            for (String value : values) {
-                Object parsedValue = parseValue(value);
-                row.add(parsedValue);
+            for (int i = 0; i< columns.size();i++) {
+                Object parsedValue = parseValue(values[i]);
+                data.get(i).add(parsedValue);
             }
-            data.add(row);
         }
         reader.close();
     }
