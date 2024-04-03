@@ -1,4 +1,4 @@
-import org.junit.Before;
+import org.junit.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -17,7 +17,7 @@ public class DataframeTest {
 
 
     private List<String> name = new ArrayList<>();
-    private List<List<Object>> datas = new ArrayList<>();
+    private List<Column> datas = new ArrayList<>();
     @Before
     public void init(){
         for(int i =0; i < 3; i++)

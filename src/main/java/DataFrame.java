@@ -7,48 +7,86 @@ import java.util.List;
 
 public class DataFrame {
     private List<String> columns;
-    private List<List<Object>> data;
+    private List<Column> data;
 
     // Constructeur prenant une liste de colonnes en paramètre
-    public DataFrame(List<String> columns, List<List<Object>> data) {
+    public DataFrame(List<String> columns, List<Column> data) {
         this.columns = columns;
         this.data = data;
     }
 
     // Constructeur prenant un fichier CSV en entrée
-    public DataFrame(String csvFilePath) throws IOException {
+    public DataFrame(String csvFilePath) throws IOException, TypeMismatchException {
         BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
         String line;
         columns = new ArrayList<>();
         data = new ArrayList<>();
 
         // Lecture de la première ligne pour récupérer les noms de colonnes
-        if ((line = reader.readLine()) != null) {
+        if ((line = reader.readLine()) != null) { //Remplissage des noms
             columns = Arrays.asList(line.split(","));
         }
 
-        // Lecture des lignes suivantes pour récupérer les données
-        while ((line = reader.readLine()) != null) {
-            List<Object> row = new ArrayList<>();
+
+        if ((line = reader.readLine()) != null) { //Création des colonnes
             String[] values = line.split(",");
-            for (String value : values) {
-                Object parsedValue = parseValue(value);
-                row.add(parsedValue);
+            for(int i =0; i < columns.size(); i++){
+                Types column = Types.detectType(values[i]);
+                switch (column){
+                    case INT:
+                        this.data.add(new Column<Integer>(column));
+                        break;
+                    case STRING:
+                        this.data.add(new Column<String>(column));
+                        break;
+                    case FLOAT:
+                        this.data.add(new Column<Float>(column));
+                        break;
+                }
+
             }
-            data.add(row);
         }
+
+        // Lecture des lignes suivantes pour récupérer les données
+         do {
+            String[] values = line.split(",");
+
+            for (int i =0; i < columns.size(); i++) {
+                if(this.data.get(i).getType() == Types.detectType(values[i])) {
+                    //Si tu es du même type que ta colonne
+                    switch(this.data.get(i).getType()){
+                        case INT:
+                            Integer intValue = (Integer)parseValue(values[i]);
+                            this.data.get(i).add(intValue);
+                            break;
+                        case STRING:
+                            String stringValue = (String)parseValue(values[i]);
+                            this.data.get(i).add(stringValue);
+                            break;
+                        case FLOAT:
+                            Float floatValue = (Float)parseValue(values[i]);
+                            this.data.get(i).add(floatValue);
+                            break;
+                    }
+
+                }else{
+                    throw new TypeMismatchException();
+                }
+            }
+
+        }while ((line = reader.readLine()) != null);
         reader.close();
     }
 
     // Méthode pour détecter et parser les valeurs en int, float ou string
-    private Object parseValue(String value) {
+    private Object parseValue(String term){
         try {
-            return Integer.parseInt(value);
+            return Integer.parseInt(term);
         } catch (NumberFormatException e1) {
             try {
-                return Float.parseFloat(value);
+                return Float.parseFloat(term);
             } catch (NumberFormatException e2) {
-                return value;
+                return term;
             }
         }
     }
