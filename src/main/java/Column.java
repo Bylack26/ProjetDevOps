@@ -10,6 +10,10 @@ public class Column<T> {
         this.list = new ArrayList<T>();
     }
 
+    public Column(){
+        this.list = new ArrayList<T>();
+    }
+
     public T getValue(int i){
         return this.list.get(i);
     }
@@ -20,6 +24,10 @@ public class Column<T> {
 
     public Types getType(){
         return columnType;
+    }
+
+    public int length(){
+        return this.list.size();
     }
 
 }

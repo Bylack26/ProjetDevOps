@@ -35,6 +35,7 @@ public class DataframeTest {
 
         List<Object> objets = new ArrayList<>();
         objets.add(new TestingData(1, 3));
+        objets.add(new TestingData(3, 4));
 
     }
     @Test
