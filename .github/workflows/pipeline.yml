@@ -21,7 +21,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'  # Spécifiez ici la version de Java que vous utilisez
+          distribution: 'adopt'  # Spécifiez la distribution de Java
       - name: Run mvn test
         run: mvn test
 
