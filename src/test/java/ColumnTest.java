@@ -8,16 +8,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ColumnTest {
 
     @Test
-    public void constructorTest() {
+    public void constructorInt() {
         Types typeInt = Types.INT;
-        Column<Integer> intColumn = new Column<Integer>(typeInt);
-        assertTrue(intColumn != null);
+        Column<Integer> Column = new Column<Integer>(typeInt);
+        Types colType = Column.getType();
+        assertTrue(Types.INT == colType);
     }
 
-    public void constructorTest2() {
+    public void constructorFloat() {
+        Types typeFloat = Types.FLOAT;
+        Column<Integer> Column = new Column<Integer>(typeFloat);
+        Types colType = Column.getType();
+        assertTrue(Types.FLOAT == colType);
+    }
+    public void constructorTest() {
         Types typeInt = Types.FLOAT;
-        Column<Integer> intColumn = new Column<Integer>(typeInt);
-        assertTrue(intColumn != null);
+        Column<Integer> Column = new Column<Integer>(typeInt);
+        Types colType = Column.getType();
+        assertTrue(Types.STRING == colType);
     }
 }
 
