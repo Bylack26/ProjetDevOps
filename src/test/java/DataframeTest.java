@@ -1,4 +1,4 @@
-import org.junit.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -18,7 +18,7 @@ public class DataframeTest {
 
     private List<String> name = new ArrayList<>();
     private List<Column> datas = new ArrayList<>();
-    @Before
+    @BeforeEach
     public void init(){
         for(int i =0; i < 3; i++)
             name.add("Colonne" + i);

@@ -31,7 +31,6 @@ public class DataFrame {
         String line;
         columns = new ArrayList<>();
         data = new ArrayList<>();
-
         // Lecture de la première ligne pour récupérer les noms de colonnes
         if ((line = reader.readLine()) != null) { //Remplissage des noms
             columns = Arrays.asList(line.split(","));
