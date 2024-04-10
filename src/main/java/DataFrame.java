@@ -9,10 +9,20 @@ public class DataFrame {
     private List<String> columns;
     private List<Column> data;
 
+    private int lengthCol;
+
     // Constructeur prenant une liste de colonnes en paramètre
     public DataFrame(List<String> columns, List<Column> data) {
         this.columns = columns;
         this.data = data;
+        this.lengthCol = 0;
+        for(Column col : data){
+            if(col.length() > lengthCol){
+                lengthCol = col.length();
+            }
+        }
+        this.fill();
+
     }
 
     // Constructeur prenant un fichier CSV en entrée
@@ -21,12 +31,10 @@ public class DataFrame {
         String line;
         columns = new ArrayList<>();
         data = new ArrayList<>();
-
         // Lecture de la première ligne pour récupérer les noms de colonnes
         if ((line = reader.readLine()) != null) { //Remplissage des noms
             columns = Arrays.asList(line.split(","));
         }
-
 
         if ((line = reader.readLine()) != null) { //Création des colonnes
             String[] values = line.split(",");
@@ -42,15 +50,15 @@ public class DataFrame {
                     case FLOAT:
                         this.data.add(new Column<Float>(column));
                         break;
+                    default:
+                        throw new TypeMismatchException();
                 }
-
             }
         }
 
         // Lecture des lignes suivantes pour récupérer les données
          do {
             String[] values = line.split(",");
-
             for (int i =0; i < columns.size(); i++) {
                 if(this.data.get(i).getType() == Types.detectType(values[i])) {
                     //Si tu es du même type que ta colonne
@@ -76,6 +84,13 @@ public class DataFrame {
 
         }while ((line = reader.readLine()) != null);
         reader.close();
+
+        for(Column col : data){
+            if(col.length() > lengthCol){
+                lengthCol = col.length();
+            }
+        }
+        this.fill();
     }
 
     // Méthode pour détecter et parser les valeurs en int, float ou string
@@ -87,6 +102,62 @@ public class DataFrame {
                 return Float.parseFloat(term);
             } catch (NumberFormatException e2) {
                 return term;
+            }
+        }
+    }
+
+    public String toString(){
+        return displayAll();
+    }
+
+    public String displayAll(){
+        String header = getHeader();;
+        String datas = "";
+        for(int i = 0; i < this.lengthCol; i++ ){
+            for(int j = 0; j < this.data.size(); j++){
+                datas += this.data.get(j).getValue(i) + ";";
+            }
+            datas += "\n";
+
+        }
+        header += datas;
+        return header;
+    }
+
+    public String display(int ligne){
+        String header = getHeader();
+        String datas = "";
+
+        for(int i = 0; i < this.lengthCol; i++ ){
+            for(Column col : this.data){
+                datas += col.getValue(i) + ";";
+            }
+            datas += "\n";
+
+        }
+        header += datas;
+        return header;
+    }
+
+    public int getHeight(){
+        return this.lengthCol;
+    }
+
+    private String getHeader(){
+        String header = "";
+        for(String head : columns){
+            header += head + ";";
+        }
+        header += "\n";
+        return header;
+    }
+
+    private void fill(){
+        for(Column col : this.data){
+            if(col.length() < this.lengthCol){
+                while(col.length() < this.lengthCol){
+                    col.add(null);
+                }
             }
         }
     }

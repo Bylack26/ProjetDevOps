@@ -1,13 +1,16 @@
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 public class Column<T> {
 
     Types columnType;
     private ArrayList<T> list;
-
     public Column(Types type){
         this.columnType = type;
+        this.list = new ArrayList<T>();
+    }
+
+    public Column(){
         this.list = new ArrayList<T>();
     }
 
@@ -21,6 +24,10 @@ public class Column<T> {
 
     public Types getType(){
         return columnType;
+    }
+
+    public int length(){
+        return this.list.size();
     }
 
 }
