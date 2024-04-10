@@ -1,10 +1,11 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class Column<T> {
 
     Types columnType;
     private ArrayList<T> list;
+
     public Column(Types type){
         this.columnType = type;
         this.list = new ArrayList<T>();
