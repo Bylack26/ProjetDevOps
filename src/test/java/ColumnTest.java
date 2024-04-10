@@ -13,5 +13,11 @@ public class ColumnTest {
         Column<Integer> intColumn = new Column<Integer>(typeInt);
         assertTrue(intColumn != null);
     }
+
+    public void constructorTest2() {
+        Types typeInt = Types.FLOAT;
+        Column<Integer> intColumn = new Column<Integer>(typeInt);
+        assertTrue(intColumn != null);
+    }
 }
 
