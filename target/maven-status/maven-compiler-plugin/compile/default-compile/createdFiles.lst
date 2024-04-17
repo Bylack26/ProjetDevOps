@@ -1,5 +1,6 @@
 DataFrame.class
 Types.class
+Statistics.class
 Column.class
 TypeMismatchException.class
 DataFrame$1.class
