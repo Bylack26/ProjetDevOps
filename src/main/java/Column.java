@@ -46,7 +46,7 @@ public class Column<T> {
     }
 
     public Column<T> split(List<Integer> indices){
-        Column<T> cl = new Column<>();
+        Column<T> cl = new Column<>(this.columnType);
         for(int i : indices){
             try {
                 cl.add(this.getValue(i));
@@ -58,7 +58,7 @@ public class Column<T> {
     }
 
     public Column<T> split(int i, int j){
-        Column<T> cl = new Column<>();
+        Column<T> cl = new Column<>(this.columnType);
         for(;i < j; i++){
                 cl.add(this.getValue(i));
         }
