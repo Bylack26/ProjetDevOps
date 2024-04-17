@@ -54,7 +54,7 @@ Dans l'état actuel des choses nous pouvons commencer à voir les possiblités q
 Ensuite viennent les outils JaCoCo et JUnit, respectivement pour la couverture de code et les tests. Ces deux outils permettent de faciliter et d'automatiser, via maven, la prise en charge des tests et les statisques sur la quantité de code couvert par nos tests.
 Dans l'ensemble cela permet d'obtenir des informations sur la qualité du code et de traquer les erreurs ou les points à revoir.
 L'utilisation de pipeline GitHub nous permet aussi d'utiliser ces tests pour refuser du code risquant de dégradé une branche plus importante (lors d'un merge vers la branche develop par exemple).
-Ainsi tout code devra s'acquitter des tests avant de pouvoir être accepté. Il s'agit là d'une sécurité, pour éviter que le partage du travail ne déteriore la qualité du projet, lorsque des branches distinctes viennent à modifier le des aspects sensibles du projet.
+Ainsi tout code devra s'acquitter des tests avant de pouvoir être accepté. Il s'agit là d'une sécurité, pour éviter que le partage du travail ne déteriore la qualité du projet, lorsque des branches distinctes viennent à modifier des aspects sensibles du projet pouvant résulter en des conflits avec les versions provenant d'autre branches. Il reste alors la garantie que la portion de code couverte par les tests doit toujours au moins y être conforme. 
 
 
 ## Workflow Git : 
