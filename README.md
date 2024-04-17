@@ -51,6 +51,12 @@ Ainsi le travail peut être aisément séparé comme nous le détaillerons plus 
 La mise en place d'images Docker est quant à elle une première étape, permettant à terme d'améliorer la qualité du code en nous permettant de le tester sur diverses architectures, dans des conditions variés, etc...
 Dans l'état actuel des choses nous pouvons commencer à voir les possiblités qui nous sont offertes avec l'image de démonstration généré par le dockerfile.
 
+Ensuite viennent les outils JaCoCo et JUnit, respectivement pour la couverture de code et les tests. Ces deux outils permettent de faciliter et d'automatiser, via maven, la prise en charge des tests et les statisques sur la quantité de code couvert par nos tests.
+Dans l'ensemble cela permet d'obtenir des informations sur la qualité du code et de traquer les erreurs ou les points à revoir.
+L'utilisation de pipeline GitHub nous permet aussi d'utiliser ces tests pour refuser du code risquant de dégradé une branche plus importante (lors d'un merge vers la branche develop par exemple).
+Ainsi tout code devra s'acquitter des tests avant de pouvoir être accepté. Il s'agit là d'une sécurité, pour éviter que le partage du travail ne déteriore la qualité du projet, lorsque des branches distinctes viennent à modifier le des aspects sensibles du projet.
+
+
 ## Workflow Git : 
 Chaque nouvelle *feature* doit fait l'objet d'une nouvelle branche dérivant de la branche **develop**. Cette branche est utilisé comme branche principale au sein de l'équipe et n'est donc pas destiné aux utilisateurs.
 Une fois les fonctionnalités implémentées les branches doivent passer les tests avant d'être poussées vers le dépot. La fusion de ces branches doit ensuite être soumise à une revu lors d'une *pull request*. Lorsque l'ensemble du projet semble être arrivé à un niveau d'implémentation satisfaisant il peut alors être fusionné vers la branche **main**, celle-ci à direction des utilisateurs. Dans le même temps une telle fusion va générer une image *docker* permettant de faire une petite démonstration de notre ***Dataframe***.
