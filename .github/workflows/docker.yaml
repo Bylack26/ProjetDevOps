@@ -17,7 +17,7 @@ jobs:
       run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
     - name: Build Docker image
-      run: docker build -t Bylack26/dev_ops:latest .
+      run: docker build -t bylack26/dev_ops:latest .
 
     - name: Push Docker image to Docker Hub
-      run: docker push Bylack26/dev_ops:latest
+      run: docker push bylack26/dev_ops:latest
