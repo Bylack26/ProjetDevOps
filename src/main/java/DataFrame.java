@@ -12,7 +12,7 @@ public class DataFrame {
     private int lengthCol;
 
     // Constructeur prenant une liste de colonnes en paramètre
-    public DataFrame(List<String> columns, List<Column> data) {
+    public DataFrame(List<String> columns, List<Column> data) throws TypeMismatchException{
         this.columns = columns;
         this.data = data;
         this.lengthCol = 0;
@@ -62,6 +62,7 @@ public class DataFrame {
                 String[] values = line.split(",");
                 for (int i = 0; i < columns.size(); i++) {
                     if(values[i].isEmpty()){
+                        if(this.data.get(i).getType() == Types.INT || this.data.get(i).getType() == Types.FLOAT)
                         this.data.get(i).add(null);
                     }
                     else if (this.data.get(i).getType() == Types.detectType(values[i])) {
@@ -73,7 +74,7 @@ public class DataFrame {
                                 break;
                             case STRING:
                                 String stringValue = (String) parseValue(values[i]);
-                                this.data.get(i).add(stringValue);
+                                this.data.get(i).add(   stringValue);
                                 break;
                             case FLOAT:
                                 Float floatValue = (Float) parseValue(values[i]);
@@ -120,7 +121,7 @@ public class DataFrame {
         String datas = "";
         for(int i = 0; i < this.lengthCol; i++ ){
             for(int j = 0; j < this.data.size(); j++){
-                datas += this.data.get(j).getValue(i) + ";";
+                datas += this.data.get(j).getValue(i) + ",";
             }
             datas += "\n";
 
@@ -132,10 +133,13 @@ public class DataFrame {
     public String display(int ligne){
         String header = displayHeader();
         String datas = "";
+        if (ligne > 0) {
+            ligne = ligne - 1;
+        }
 
-        for(int i = 0; i < this.lengthCol; i++ ){
+        for(int i = ligne; i < this.lengthCol; i++ ){
             for(Column col : this.data){
-                datas += col.getValue(i) + ";";
+                datas += col.getValue(i) + ",";
             }
             datas += "\n";
 
@@ -148,16 +152,16 @@ public class DataFrame {
         return this.lengthCol;
     }
 
-    private String displayHeader(){
+    public String displayHeader(){
         String header = "";
         for(String head : columns){
-            header += head + ";";
+            header += head + ",";
         }
         header += "\n";
         return header;
     }
 
-    private void fill(){
+    private void fill() throws TypeMismatchException{
         for(Column col : this.data){
             if(col.length() < this.lengthCol){
                 while(col.length() < this.lengthCol){
