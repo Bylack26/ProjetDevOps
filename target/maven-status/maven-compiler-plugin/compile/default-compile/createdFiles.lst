@@ -1,5 +1,6 @@
 DataFrame.class
 Types.class
 Column.class
+Selector.class
 TypeMismatchException.class
 DataFrame$1.class
