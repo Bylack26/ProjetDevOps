@@ -452,7 +452,7 @@ public class DataframeTest {
     }
     
     @Test
-    public void testDisplaylinenullValue() {
+    public void testDisplaylinenullValue3() {
 
         DataFrame df;
         try {
