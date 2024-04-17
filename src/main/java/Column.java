@@ -31,6 +31,10 @@ public class Column<T> {
         return this.list.size();
     }
 
+    public int length(){
+        return this.list.size();
+    }
+
     public Column<T> split(List<Integer> indices){
         Column<T> cl = new Column<>();
         for(int i : indices){
