@@ -1,6 +1,7 @@
-DataFrame.class
-Types.class
-Column.class
 Selector.class
 TypeMismatchException.class
+DataFrame.class
+Types.class
+Statistics.class
+Column.class
 DataFrame$1.class

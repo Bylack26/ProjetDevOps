@@ -10,7 +10,11 @@ public class Selector {
             lc.add(datas.get(i).split(indices));
         }
 
-        return new DataFrame(ls, lc);
+        try {
+            return new DataFrame(ls, lc);
+        } catch (TypeMismatchException e) {
+            return null;
+        }
     }
 
     public static DataFrame selectRows(DataFrame dataframe, int rangeStart, int rangeEnd){
@@ -21,7 +25,11 @@ public class Selector {
             lc.add(datas.get(i).split(rangeStart, rangeEnd));
         }
 
-        return new DataFrame(ls, lc);
+        try {
+            return new DataFrame(ls, lc);
+        } catch (TypeMismatchException e) {
+            return null;
+        }
     }
 
     public static DataFrame selectCols(DataFrame dataframe, List<String> labels){
@@ -32,21 +40,25 @@ public class Selector {
         int i =0;
         int j =0;
         //Pour chaque label
-        for(String s : labels){
-            j=0;
+        for (String s : labels) {
+            j = 0;
             //recherche de l'indice du label dans le dataframe
-            while(j < ls.size() && !ls.get(j).equals(s)){
+            while (j < ls.size() && !ls.get(j).equals(s)) {
 
                 j++;
             }
             //Si le label est dans le dataframe ajout d'une colonne de nom "label" et dont les données sont celle du dataframe
-            if( j < ls.size()){
+            if (j < ls.size()) {
                 names.add(s);
                 lc.add(datas.get(j));
             }
         }
+        try {
+            return new DataFrame(names, lc);
+        } catch (TypeMismatchException e) {
+            return null;
+        }
 
-        return new DataFrame(names, lc);
     }
 
 }

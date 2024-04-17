@@ -12,7 +12,7 @@ public class DataFrame {
     private int lengthCol;
 
     // Constructeur prenant une liste de colonnes en paramètre
-    public DataFrame(List<String> columns, List<Column> data) {
+    public DataFrame(List<String> columns, List<Column> data) throws TypeMismatchException{
         this.columns = columns;
         this.data = data;
         this.lengthCol = 0;
@@ -62,6 +62,7 @@ public class DataFrame {
                 String[] values = line.split(",");
                 for (int i = 0; i < columns.size(); i++) {
                     if(values[i].isEmpty()){
+                        if(this.data.get(i).getType() == Types.INT || this.data.get(i).getType() == Types.FLOAT)
                         this.data.get(i).add(null);
                     }
                     else if (this.data.get(i).getType() == Types.detectType(values[i])) {
@@ -160,7 +161,7 @@ public class DataFrame {
         return header;
     }
 
-    private void fill(){
+    private void fill() throws TypeMismatchException{
         for(Column col : this.data){
             if(col.length() < this.lengthCol){
                 while(col.length() < this.lengthCol){
