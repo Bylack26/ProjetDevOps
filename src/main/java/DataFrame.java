@@ -74,7 +74,7 @@ public class DataFrame {
                                 break;
                             case STRING:
                                 String stringValue = (String) parseValue(values[i]);
-                                this.data.get(i).add(stringValue);
+                                this.data.get(i).add(   stringValue);
                                 break;
                             case FLOAT:
                                 Float floatValue = (Float) parseValue(values[i]);
@@ -121,7 +121,7 @@ public class DataFrame {
         String datas = "";
         for(int i = 0; i < this.lengthCol; i++ ){
             for(int j = 0; j < this.data.size(); j++){
-                datas += this.data.get(j).getValue(i) + ";";
+                datas += this.data.get(j).getValue(i) + ",";
             }
             datas += "\n";
 
@@ -133,10 +133,13 @@ public class DataFrame {
     public String display(int ligne){
         String header = displayHeader();
         String datas = "";
+        if (ligne > 0) {
+            ligne = ligne - 1;
+        }
 
-        for(int i = 0; i < this.lengthCol; i++ ){
+        for(int i = ligne; i < this.lengthCol; i++ ){
             for(Column col : this.data){
-                datas += col.getValue(i) + ";";
+                datas += col.getValue(i) + ",";
             }
             datas += "\n";
 
@@ -149,10 +152,10 @@ public class DataFrame {
         return this.lengthCol;
     }
 
-    private String displayHeader(){
+    public String displayHeader(){
         String header = "";
         for(String head : columns){
-            header += head + ";";
+            header += head + ",";
         }
         header += "\n";
         return header;
