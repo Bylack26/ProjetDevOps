@@ -27,37 +27,37 @@ public class DataframeTest {
 
         Types typeFloat = Types.FLOAT;
         Column<Float> ColumnNote = new Column<Float>(typeFloat);
+            for (int i = 0; i < 4; i++) {
+                ColumnID.add(i + 1);
+            }
 
-        for (int i = 0; i < 4; i++) {
-            ColumnID.add(i + 1);
-        }
+            ColumnPrenom.add("Alban");
+            ColumnPrenom.add("Gaetan");
+            ColumnPrenom.add("Fabien");
+            ColumnPrenom.add("Raphael");
 
-        ColumnPrenom.add("Alban");
-        ColumnPrenom.add("Gaetan");
-        ColumnPrenom.add("Fabien");
-        ColumnPrenom.add("Raphael");
+            ColumnNom.add("Faurie");
+            ColumnNom.add("Combe");
+            ColumnNom.add("Vial");
+            ColumnNom.add("Balssa");
 
-        ColumnNom.add("Faurie");
-        ColumnNom.add("Combe");
-        ColumnNom.add("Vial");
-        ColumnNom.add("Balssa");
+            ColumnNote.add((float) 45.2);
+            ColumnNote.add((float) 48.0);
+            ColumnNote.add((float) 0.1);
+            ColumnNote.add((float) 1257854.987457);
 
-        ColumnNote.add((float)45.2);
-        ColumnNote.add((float)48.0);
-        ColumnNote.add((float)0.1);
-        ColumnNote.add((float) 1257854.987457);
-        
-        datas.add(ColumnID);
-        datas.add(ColumnPrenom);
-        datas.add(ColumnNom);
-        datas.add(ColumnNote);
-        
-        
-        List<String> names = new ArrayList<String>();
-        names.add("ID");
-        names.add("Prenom");
-        names.add("Nom");
-        names.add("Note");
+            datas.add(ColumnID);
+            datas.add(ColumnPrenom);
+            datas.add(ColumnNom);
+            datas.add(ColumnNote);
+
+
+            List<String> names = new ArrayList<String>();
+            names.add("ID");
+            names.add("Prenom");
+            names.add("Nom");
+            names.add("Note");
+
     }
     
 
