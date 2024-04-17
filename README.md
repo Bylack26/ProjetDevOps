@@ -8,3 +8,45 @@
 
 ## Ligne de commande pour Jacoco
 mvn clean org.jacoco:jacoco-maven-plugin:0.8.8:prepare-agent  verify org.jacoco:jacoco-maven-plugin:0.8.8:report
+
+
+# Documentation
+
+## Dataframe:
+- Dataframe(List<String> labels, List<Column> datas) : Construit un dataframe à partir des **labels** du dataframe et dont les données sont contenues **data**. Si les colonnes ne sont pas de taille égales, du padding complète les colonnes.
+- Dataframe(String csvFilePath) : Construit un dataframe à partir d'un fichier **csvFilePath**. La première ligne du fichier contient les labels des colonnes et la suivante sert à inférer le type de la colonne.
+- String displayAll() : renvoie un String du dataframe dans son intégralité, labels et données compris.
+- String display(int ligne) : renvoie un String de la **ligne** passé en paramètre du dataframe.
+- String displayHeader() : renvoie un String contenant les labels du dataframe.
+- List<String> getNames() : renvoie une List contenant les labels du dataframe.
+- List<Column> getData() : renvoie une List<Column> contenant les colonnes du dataframe.
+
+## Column:
+- Column<T>(Types type) : Construit une colonne de Types **type**.
+- Column<T>() : Construit une colonne sans préciser son Types.
+- T getValue(int i): renvoie la valeur de la ligne **i** de la colonne
+- void add(T elm): Ajoute un élément à la colonne. Si le Types n'est pas encore connu il est déterminé par le premier élément ajouté.
+- Types getType(): renvoie le Types de la colonne
+- int length(): renvoie la longueur de la colonne
+- Column<T> split(List<Integer> indices): renvoie une nouvelle Column à partir des lignes données par les **indices**.
+- Column<T> split(int i, int j) : renvoie une nouvelle Column à partir de l'index **i** jusqu'à l'index **j**.
+
+## Selector:
+- static Dataframe selectRows(DataFrame dataframe, List<Integer> indices): renvoie un nouveau dataframe contenant les labels du **dataframe** d'origine et n'ayant que les lignes dont les **indices** sont passés en paramètre.
+- static DataFrame selectRows(DataFrame dataframe, int rangeStart, int rangeEnd) : renvoie un nouveau dataframe contenant les labels du **dataframe** d'origine et n'ayant que les lignes dont les indices sont contenus entre **rangeStart** et **rangeEnd**.
+- static DataFrame selectCols(DataFrame dataframe, List<String> labels): renvoie un nouveau dataframe contenant les colonnes dont les **labels** sont passés en paramètres.
+
+## Statistics:
+- static float mean(Column c) : calcule la moyenne des valeurs de la **colonne** passée en paramètre si cette dernière n'est pas de type String.
+
+# Choix des outils : 
+- Github : Choix de la platerforme Github pour déposer notre projet, par facilité puisque nous connaissions tous la plateforme.
+- Jacoco : Choix de l'outil Jacoco pour la couverture de code, 
+- JUnit : 
+- Docker : 
+
+## Workflow Git : 
+Chaque nouvelle *feature* doit fait l'objet d'une nouvelle branche dérivant de la branche **develop**. Cette branche est utilisé comme branche principale au sein de l'équipe et n'est donc pas destiné aux utilisateurs.
+Une fois les fonctionnalités implémentées les branches doivent passer les tests avant d'être poussées vers le dépot. La fusion de ces branches doit ensuite être soumise à une revu lors d'une *pull request*. Lorsque l'ensemble du projet semble être arrivé à un niveau d'implémentation satisfaisant il peut alors être fusionné vers la branche **main**, celle-ci à direction des utilisateurs. Dans le même temps une telle fusion va générer une image *docker* permettant de faire une petite démonstration de notre ***Dataframe***.
+L'image docker est ensuite poussée vers un dépôt DockerHub : [https://hub.docker.com/repository/docker/bylack26/dev_ops/general](https://hub.docker.com/repository/docker/bylack26/dev_ops/general).
+  
