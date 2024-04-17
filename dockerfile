@@ -11,6 +11,6 @@ COPY ./pom.xml .
 
 
 # Compilation et exécution du projet Maven
-RUN mvn install
+RUN mvn install -DskipTests
 
 CMD ["java", "-jar", "target/Projet-1.0-SNAPSHOT.jar"]

@@ -1,12 +1,10 @@
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DataframeTest {
 
@@ -361,7 +359,7 @@ public class DataframeTest {
                     "Tina,41,Le Caire,2800.65,\n" +
                     "Victoria,43,Paris,2550.7,\n" +
                     "William,44,New York,2900.75,\n";
-            assertEquals(result, resultfunc);
+            assertTrue(result.equals(resultfunc));
         } catch (Exception e) {
 
         }
