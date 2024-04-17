@@ -42,8 +42,14 @@ mvn clean org.jacoco:jacoco-maven-plugin:0.8.8:prepare-agent  verify org.jacoco:
 # Choix des outils : 
 - Github : Choix de la platerforme Github pour déposer notre projet, par facilité puisque nous connaissions tous la plateforme.
 - Jacoco : Choix de l'outil Jacoco pour la couverture de code, 
-- JUnit : 
-- Docker : 
+- JUnit : Choix de l'outil JUnit 5 pour l'automatisation des tests,
+- Docker : Choix de docker pour la mise en place d'images permettant l'éxécution d'un petit script de démonstration.
+
+Les choix décrit précédemment ont été dans le but d'automatiser et d'améliorer les déploiements des versions du projet.
+D'un point de vue organisation l'utilisation d'un service tel que Github permet de gérer de manière claire et versionnée, l'avancement du projet.
+Ainsi le travail peut être aisément séparé comme nous le détaillerons plus tard grâce à notre Workflow Git.
+La mise en place d'images Docker est quant à elle une première étape, permettant à terme d'améliorer la qualité du code en nous permettant de le tester sur diverses architectures, dans des conditions variés, etc...
+Dans l'état actuel des choses nous pouvons commencer à voir les possiblités qui nous sont offertes avec l'image de démonstration généré par le dockerfile.
 
 ## Workflow Git : 
 Chaque nouvelle *feature* doit fait l'objet d'une nouvelle branche dérivant de la branche **develop**. Cette branche est utilisé comme branche principale au sein de l'équipe et n'est donc pas destiné aux utilisateurs.
